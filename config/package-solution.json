@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sp-fx-hello-world-client-side-solution",
+    "id": "f6b0896f-ed95-42ca-8b3a-41b091606df5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SPFx Hello World description"
+      },
+      "longDescription": {
+        "default": "SPFx Hello World description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "sp-fx-hello-world Feature",
+        "description": "The feature that activates elements of the sp-fx-hello-world solution.",
+        "id": "d27d823b-195b-416d-99c5-cabcc8c4e156",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sp-fx-hello-world.sppkg"
+  }
+}
