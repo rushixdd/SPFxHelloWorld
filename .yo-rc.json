@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.3",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "sp-fx-hello-world",
+    "libraryId": "f6b0896f-ed95-42ca-8b3a-41b091606df5",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "SPFx Hello World",
+    "solutionShortDescription": "SPFx Hello World description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
