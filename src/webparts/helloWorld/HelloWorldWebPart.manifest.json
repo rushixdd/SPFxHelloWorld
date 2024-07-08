@@ -22,7 +22,11 @@
     "description": { "default": "Hello World description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Hello World"
+      "description": "HelloWorld",
+      "test": "Multi-line text field",
+      "test1": true,
+      "test2": "2",
+      "test3": true
     }
   }]
 }
