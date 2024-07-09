@@ -2,33 +2,16 @@ import { Version } from "@microsoft/sp-core-library";
 import {
   type IPropertyPaneConfiguration,
   PropertyPaneTextField,
-  PropertyPaneCheckbox,
-  PropertyPaneDropdown,
-  PropertyPaneToggle,
 } from "@microsoft/sp-property-pane";
 import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import type { IReadonlyTheme } from "@microsoft/sp-component-base";
-import { escape } from "@microsoft/sp-lodash-subset";
 
 import styles from "./HelloWorldWebPart.module.scss";
 import * as strings from "HelloWorldWebPartStrings";
-import { SPHttpClient, SPHttpClientResponse } from "@microsoft/sp-http";
 
 export interface IHelloWorldWebPartProps {
+  heading: string;
   description: string;
-  test: string;
-  test1: boolean;
-  test2: string;
-  test3: boolean;
-}
-
-export interface ISPLists {
-  value: ISPList[];
-}
-
-export interface ISPList {
-  Title: string;
-  Id: string;
 }
 
 export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorldWebPartProps> {
@@ -38,8 +21,8 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
   public render(): void {
     this.domElement.innerHTML = `
       <section class="${styles.helloWorld} ${
-            !!this.context.sdks.microsoftTeams ? styles.teams : ""
-          }">
+      !!this.context.sdks.microsoftTeams ? styles.teams : ""
+    }">
         <div class="${styles.welcome}">
           <img alt="" src="${
             this._isDarkTheme
@@ -49,62 +32,42 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
           <h2>Well done, ${escape(this.context.pageContext.user.displayName)}!</h2>
           <div>${this._environmentMessage}</div>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <div>Web part description: <strong>${escape(
-            this.properties.description
-          )}</strong></div>
-          <div>Web part test: <strong>${escape(this.properties.test)}</strong></div>
-          <div>Loading from: <strong>${escape(
-            this.context.pageContext.web.title
-          )}</strong></div>
+       <div class="${styles.container}">
+        <div class="${styles.header}">
+          <h1>Discover the beauty around the world</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Faucibus in libero risus sempur habitant arcu.</p>
+          <a href="#" class="${styles.btn}">Get started</a>
         </div>
-        <div id="spListContainer" />
+        <div class="${styles.imagesGrid}">
+          <div class="${styles.imageItem} ${styles.large}">
+            <img src="${require("./assets/left.jpg")}">
+          </div>
+          <div class="${styles.imageItem}">
+            <img src="${require("./assets/right.jpg")}">
+          </div>
+        </div>
+        <div class="${styles.imageCard}>
+          <div class="${styles.numberedImage}">
+            <h1>01</h1>
+            <img src="${require("./assets/01.jpg")}">
+          </div>
+          <div class="${styles.numberedImage}">>
+            <h1>02</h1>
+            <img src="${require("./assets/02.jpg")}">
+          </div>
+          <div class="${styles.numberedImage}">>
+            <h1>03</h1>
+            <img src="${require("./assets/03.jpg")}">
+          </div>
+        </div>
+       </div>
       </section>`;
-
-    this._renderListAsync();
   }
 
   protected onInit(): Promise<void> {
     return this._getEnvironmentMessage().then((message) => {
       this._environmentMessage = message;
     });
-  }
-
-  private _renderListAsync(): void {
-    this._getListData()
-      .then((response) => {
-        this._renderList(response.value);
-      })
-      .catch(() => {});
-  }
-
-  private _getListData(): Promise<ISPLists> {
-    return this.context.spHttpClient
-      .get(
-        `${this.context.pageContext.web.absoluteUrl}/_api/web/lists?$filter=Hidden eq false`,
-        SPHttpClient.configurations.v1
-      )
-      .then((response: SPHttpClientResponse) => {
-        return response.json();
-      })
-      .catch(() => {});
-  }
-
-  private _renderList(items: ISPList[]): void {
-    let html: string = "";
-    items.forEach((item: ISPList) => {
-      html += `
-    <ul class="${styles.list}">
-      <li class="${styles.listItem}">
-        <span class="ms-font-l">${item.Title}</span>
-      </li>
-    </ul>`;
-    });
-
-    if (this.domElement.querySelector("#spListContainer") != null) {
-      this.domElement.querySelector("#spListContainer")!.innerHTML = html;
-    }
   }
 
   private _getEnvironmentMessage(): Promise<string> {
@@ -180,31 +143,14 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: "Contents",
               groupFields: [
                 PropertyPaneTextField("description", {
-                  label: strings.DescriptionFieldLabel,
+                  label: "Heading",
                 }),
                 PropertyPaneTextField("test", {
-                  label: "Multi-line Text Field",
+                  label: "Description",
                   multiline: true,
-                }),
-                PropertyPaneCheckbox("test1", {
-                  text: "Checkbox",
-                }),
-                PropertyPaneDropdown("test2", {
-                  label: "Dropdown",
-                  options: [
-                    { key: "1", text: "One" },
-                    { key: "2", text: "Two" },
-                    { key: "3", text: "Three" },
-                    { key: "4", text: "Four" },
-                  ],
-                }),
-                PropertyPaneToggle("test3", {
-                  label: "Toggle",
-                  onText: "On",
-                  offText: "Off",
                 }),
               ],
             },
