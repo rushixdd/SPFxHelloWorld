@@ -22,11 +22,8 @@
     "description": { "default": "Hello World description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "HelloWorld",
-      "test": "Multi-line text field",
-      "test1": true,
-      "test2": "2",
-      "test3": true
+      "heading": "Discover the beauty around the world",
+      "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit Faucibus in libero risus sempur habitant arcu."
     }
   }]
 }
