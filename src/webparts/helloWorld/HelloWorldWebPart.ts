@@ -8,6 +8,7 @@ import type { IReadonlyTheme } from "@microsoft/sp-component-base";
 
 import styles from "./HelloWorldWebPart.module.scss";
 import * as strings from "HelloWorldWebPartStrings";
+import { escape } from "@microsoft/sp-lodash-subset";
 
 export interface IHelloWorldWebPartProps {
   heading: string;
@@ -34,8 +35,8 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
         </div>
        <div class="${styles.container}">
         <div class="${styles.header}">
-          <h1>Discover the beauty around the world</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Faucibus in libero risus sempur habitant arcu.</p>
+          <h1>${escape(this.properties.heading)}</h1>
+          <p>${escape(this.properties.description)}</p>
           <a href="#" class="${styles.btn}">Get started</a>
         </div>
         <div class="${styles.imagesGrid}">
@@ -150,7 +151,6 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
                 }),
                 PropertyPaneTextField("test", {
                   label: "Description",
-                  multiline: true,
                 }),
               ],
             },
